@@ -1,11 +1,11 @@
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <div
-            className="flex flex-col"
+            className="min-h-[540px]"
             style={{
                 backgroundImage: "linear-gradient(#b8b8b5, #e3e2dd)",
             }}>
-            <div className="flex-1 mx-auto max-w-screen-lg">{children}</div>
+            <div className="px-12 mx-auto max-w-screen-lg">{children}</div>
         </div>
     );
 }

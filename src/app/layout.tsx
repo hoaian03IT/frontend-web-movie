@@ -10,14 +10,16 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
-                <header className="bg-zinc-800 shadow-lg drop-shadow-md">
-                    <NavHeader />
-                </header>
-                <div className="flex-1">{children}</div>
-                <footer className="bg-black">
-                    <FooterSection />
-                </footer>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                <div className="min-h-screen flex flex-col">
+                    <header className="bg-zinc-800 shadow-lg drop-shadow-md">
+                        <NavHeader />
+                    </header>
+                    <main className="flex-1">{children}</main>
+                    <footer className="bg-black">
+                        <FooterSection />
+                    </footer>
+                </div>
             </body>
         </html>
     );

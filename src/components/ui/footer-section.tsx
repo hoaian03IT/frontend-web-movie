@@ -80,11 +80,11 @@ const links: Array<{ label: string; href: string; typeLink: "internal" | "extern
 export function FooterSection({}) {
     return (
         <div className="text-white">
-            <div className="pt-14 pb-8 px-10 mx-auto max-w-screen-lg">
+            <div className="pt-12 pb-8 px-10 mx-auto max-w-screen-lg">
                 <div className="px-10 grid grid-cols-2 gap-4">
                     <div className="col-span-1 flex flex-col items-center border-2 border-zinc-800 rounded-md px-8 py-2">
                         <p className="text-xl font-semibold">Follow IMDb on social</p>
-                        <div className="flex items-center gap-6">
+                        <div className="flex items-center justify-center flex-wrap gap-4">
                             <a
                                 href="https://www.tiktok.com/"
                                 target="_blank"
@@ -156,7 +156,7 @@ export function FooterSection({}) {
                     )
                 )}
             </div>
-            <div className="flex justify-center pt-12 pb-8">
+            <div className="flex justify-center mt-10 mb-6">
                 <AmazonLogo />
             </div>
             <div className="flex justify-center py-2">

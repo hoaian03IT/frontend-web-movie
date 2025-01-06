@@ -52,7 +52,7 @@ export function NavHeader() {
     const inputId = useId();
 
     return (
-        <nav className="mx-auto max-w-screen-xl flex items-center px-3 py-1 gap-2">
+        <nav className="mx-auto max-w-screen-xl flex items-center px-3 py-2 gap-2">
             <ButtonHome size="lg" />
             <ButtonMenu />
             <div className="flex-1 flex items-center bg-white rounded-sm">
