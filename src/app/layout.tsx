@@ -1,16 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "../components/ui/header";
-
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
+import { NavHeader } from "../components/ui/nav-header";
+import { geistMono, geistSans } from "@/components/fonts";
 
 export default function RootLayout({
     children,
@@ -20,10 +10,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <Header />
-                <main className="bg-black text-white">
-                    <div className="px-2 mx-auto max-w-screen-xl">{children}</div>
-                </main>
+                <header className="bg-zinc-800 shadow-lg drop-shadow-md">
+                    <NavHeader />
+                </header>
+                <main>{children}</main>
             </body>
         </html>
     );
