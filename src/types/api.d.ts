@@ -8,15 +8,19 @@ export namespace Request {
     interface Register extends Login {
         name: string;
     }
+    interface VerifyOTP {
+        otp: string;
+        userId: string;
+    }
 }
 
 export namespace Response {
+    interface Error {
+        message: string;
+    }
     interface Login {
         message: string;
         token: string;
         userInfo: User;
-    }
-    interface Error {
-        message: string;
     }
 }

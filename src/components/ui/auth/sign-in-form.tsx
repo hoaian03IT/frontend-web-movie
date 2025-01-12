@@ -1,16 +1,17 @@
 "use client";
 
-import { AuthService } from "@/services/auth.api";
+import { AuthService } from "@/services/auth.service";
 import { BasicLink } from "../basic-link";
 import { Button } from "../button";
 import { Input } from "../input";
-import { ZodError, z } from "zod";
+import { ZodError } from "zod";
 import { useActionState, useContext, useState } from "react";
 import { ValidationErrors } from "../validation-errors";
 import { RiLoader4Fill } from "react-icons/ri";
 import { toast } from "sonner";
 import { AuthCredentialsContext } from "@/contexts/auth-credentials-context";
 import { useRouter } from "next/navigation";
+import { loginSchema } from "@/lib/zod-validations";
 
 export function SignInForm() {
     const { setUser } = useContext(AuthCredentialsContext);
@@ -26,23 +27,12 @@ export function SignInForm() {
         const email = formData.get("email")?.toString();
         const password = formData.get("password")?.toString();
 
-        // create validate schema
-        const schema = z.object({
-            email: z.string().email({ message: "Email must be valid" }),
-            password: z
-                .string()
-                .min(8, { message: "Password must be at least 8 characters" })
-                .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#_&.])[A-Za-z\d!@#_&.]{8,64}$/, {
-                    message: `Password must include at least one uppercase, lowercase letter, number, special character (!@#_&.).`,
-                }),
-        });
-
         try {
             // reset validation errors before submitting
             setValidationErrors({ email: [], password: [] });
 
             // validate inputs
-            const validPayload = schema.parse({
+            const validPayload = loginSchema.parse({
                 email,
                 password,
             });
@@ -50,10 +40,10 @@ export function SignInForm() {
             const data = await AuthService.login(validPayload);
 
             setUser({
-                email: data.userInfo.email,
-                name: data.userInfo.name,
+                email: data?.userInfo.email ?? "",
+                name: data?.userInfo.name ?? "",
                 isLogged: true,
-                token: data.token,
+                token: data?.token ?? "",
             });
 
             router.push("/");
@@ -68,8 +58,6 @@ export function SignInForm() {
                 });
             } else {
                 let toastId = toast.error(error.message, {
-                    style: { color: "#e74c3c" },
-                    actionButtonStyle: { background: "#e74c3c" },
                     description: `Created at: ${new Date().toDateString()}`,
                     action: {
                         label: "Close",
