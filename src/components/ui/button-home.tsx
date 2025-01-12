@@ -6,6 +6,7 @@ import { oswald } from "../fonts";
 export function ButtonHome({ size = "md" }: { size: "sm" | "md" | "lg" | "xl" }) {
     return (
         <Button
+            type="button"
             className={clsx(
                 "text-black bg-yellow-500 hover:bg-yellow-500 rounded-sm",
                 size === "sm"

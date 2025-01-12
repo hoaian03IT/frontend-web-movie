@@ -7,7 +7,7 @@ export default function SignIn() {
     const [domain, setDomain] = useState<string | null>(null);
 
     useEffect(() => {
-        setDomain(document ? document.location.origin : null);
+        setDomain(typeof document !== "undefined" ? document.location.origin : null);
     }, []);
 
     return (
@@ -17,7 +17,7 @@ export default function SignIn() {
                     <h3 className="text-xl font-bold">Sign in</h3>
                     <div className="flex flex-col gap-3">
                         <Link
-                            href="/"
+                            href="/ap/sign-in"
                             className="flex items-center gap-4 border border-zinc-300 px-2 py-1 text-sm font-semibold rounded-sm">
                             <div
                                 style={{
@@ -98,7 +98,7 @@ export default function SignIn() {
                         <Separator className="w-[100px] bg-black" />
                     </div>
                     <Link
-                        href="/sign-up"
+                        href="/ap/sign-up"
                         className="p-2 flex justify-center items-center rounded-sm bg-yellow-500 text-sm font-bold">
                         Create new account
                     </Link>
