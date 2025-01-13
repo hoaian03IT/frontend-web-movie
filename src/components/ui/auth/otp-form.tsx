@@ -12,10 +12,10 @@ import clsx from "clsx";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const TIME_TO_RESEND_OTP = 60 * 2; // 2 minutes to request new OTP
+const TIME_TO_RESEND_OTP = 5; // 2 minutes to request new OTP
 
 export function OTPForm({ userId }: { userId: string }) {
-    const { setUser } = useContext(AuthCredentialsContext);
+    const { setUser, storeAuthCredentialsSession } = useContext(AuthCredentialsContext);
     const [validationErrors, setValidationErrors] = useState<string[]>([]);
     const [timeoutResend, setTimeoutResend] = useState(TIME_TO_RESEND_OTP);
 
@@ -31,6 +31,14 @@ export function OTPForm({ userId }: { userId: string }) {
                     name: data?.userInfo.name ?? "",
                     token: data?.token ?? "",
                     isLogged: true,
+                });
+
+                // store user information in session
+                storeAuthCredentialsSession({
+                    email: data?.userInfo.email ?? "",
+                    name: data?.userInfo.name ?? "",
+                    isLogged: true,
+                    token: data?.token ?? "",
                 });
 
                 // redirect user to home page after signing up
@@ -78,7 +86,7 @@ export function OTPForm({ userId }: { userId: string }) {
             <div className="flex items-center justify-center">
                 <InputOTP name="otp" maxLength={6} pattern={REGEXP_ONLY_DIGITS}>
                     <InputOTPGroup>
-                        <InputOTPSlot index={0} className="size-11 text-xl" />
+                        <InputOTPSlot autoFocus index={0} className="size-11 text-xl" />
                         <InputOTPSlot index={1} className="size-11 text-xl" />
                         <InputOTPSlot index={2} className="size-11 text-xl" />
                     </InputOTPGroup>

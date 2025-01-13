@@ -10,6 +10,7 @@ import { ZodError } from "zod";
 import { toast } from "sonner";
 import { RiLoader4Fill } from "react-icons/ri";
 import { OTPForm } from "./otp-form";
+import { ValidationErrors } from "../validation-errors";
 
 const initValidationFormData = {
     name: [],
@@ -96,6 +97,7 @@ export function SignUpForm() {
                     defaultValue={state.name}
                     placeholder="Your first and last name"
                 />
+                <ValidationErrors errors={validationErrors.name} />
             </div>
             <div>
                 <label className="cursor-pointer block mb-1 font-bold">Email</label>
@@ -105,6 +107,7 @@ export function SignUpForm() {
                     defaultValue={state.email}
                     placeholder="username@domain.com"
                 />
+                <ValidationErrors errors={validationErrors.email} />
             </div>
             <div>
                 <label className="cursor-pointer block mb-1 font-bold">Password</label>
@@ -115,9 +118,13 @@ export function SignUpForm() {
                     defaultValue={state.password}
                     placeholder="at least 8 characters"
                 />
-                <span className="flex items-center gap-2 my-2">
-                    <FaInfoCircle className="size-6 text-cyan-600" /> Password must be at least 8 characters
-                </span>
+                {validationErrors.password.length > 0 ? (
+                    <ValidationErrors errors={validationErrors.password} />
+                ) : (
+                    <span className="flex items-center gap-2 my-2">
+                        <FaInfoCircle className="size-6 text-cyan-600" /> Password must be at least 8 characters
+                    </span>
+                )}
             </div>
             <div>
                 <label className="cursor-pointer block mb-1 font-bold">Re-enter password</label>
@@ -127,6 +134,7 @@ export function SignUpForm() {
                     className="shadow-inner border-zinc-400"
                     defaultValue={state.confirmPassword}
                 />
+                <ValidationErrors errors={validationErrors.confirmPassword} />
             </div>
             <Button className="bg-yellow-400 hover:bg-yellow-500 text-black w-full rounded-3xl" disabled={isPending}>
                 {isPending && <RiLoader4Fill className="animate-spin" />} Create your IMDb account

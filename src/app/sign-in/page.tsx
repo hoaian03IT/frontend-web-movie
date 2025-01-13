@@ -13,7 +13,7 @@ export default function SignIn() {
     return (
         <div className="bg-white flex">
             <div className="p-8 basis-5/12 text-black">
-                <div className="w-[240px] mx-auto text-center space-y-3">
+                <div className="w-xl mx-auto text-center space-y-3">
                     <h3 className="text-xl font-bold">Sign in</h3>
                     <div className="flex flex-col gap-3">
                         <Link

@@ -10,7 +10,7 @@ import {
 import { AuthCredentialsContext } from "@/contexts/auth-credentials-context";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaCircleUser } from "react-icons/fa6";
 import { LuChevronDown } from "react-icons/lu";
 
@@ -24,14 +24,30 @@ const items = [
 
 export function SignInNav() {
     const { user, handleSignOut } = useContext(AuthCredentialsContext);
+    const [isLogged, setIsLogged] = useState(false);
+    const [userName, setUserName] = useState("");
+
+    useEffect(() => {
+        // if session has information about user, get user information quickly
+        if (typeof sessionStorage !== "undefined") {
+            setIsLogged(!!sessionStorage.getItem("user.isLogged"));
+            setUserName(user.name.split(" ")[1]);
+        }
+
+        // if user state changes, update local state or in case, session is empty
+        if (!sessionStorage.getItem("user.isLogged")) {
+            setIsLogged(user.isLogged);
+            setUserName(user.name.split(" ")[1]);
+        }
+    }, [user]);
 
     const router = useRouter();
 
-    return user.isLogged ? (
+    return isLogged ? (
         <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2 text-white text-sm font-semibold py-2 px-4">
                 <FaCircleUser className="size-5" />
-                {user.name.split(" ")[1]}
+                {userName}
                 <LuChevronDown className="size-5" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="dark bg-zinc-800 py-3 pr-4" side="bottom" align="start">

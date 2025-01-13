@@ -12,8 +12,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <AuthCredentialsContextProvider>
-            <html lang="en">
+        <html suppressHydrationWarning={true} lang="en">
+            <AuthCredentialsContextProvider>
                 <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                     <div className="min-h-screen flex flex-col">
                         <Toaster richColors />
@@ -26,7 +26,7 @@ export default function RootLayout({
                         </footer>
                     </div>
                 </body>
-            </html>
-        </AuthCredentialsContextProvider>
+            </AuthCredentialsContextProvider>
+        </html>
     );
 }
