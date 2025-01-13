@@ -23,4 +23,8 @@ export namespace Response {
         token: string;
         userInfo: User;
     }
+    interface RefreshToken {
+        token: string;
+        message: string;
+    }
 }

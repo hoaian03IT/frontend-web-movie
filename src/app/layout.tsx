@@ -1,7 +1,7 @@
 import "./globals.css";
-import { NavHeader } from "@/components/ui/nav-header";
+import { NavHeader } from "@/components/ui/layout/nav-header";
 import { geistMono, geistSans } from "@/components/fonts";
-import { FooterSection } from "@/components/ui/footer-section";
+import { FooterSection } from "@/components/ui/layout/footer-section";
 import React from "react";
 import { Toaster } from "@/components/ui/sonner";
 import AuthCredentialsContextProvider from "@/contexts/auth-credentials-context";

@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { loginSchema } from "@/lib/zod-validations";
 
 export function SignInForm() {
-    const { setUser } = useContext(AuthCredentialsContext);
+    const { setUser, storeAuthCredentialsSession } = useContext(AuthCredentialsContext);
 
     const [validationErrors, setValidationErrors] = useState<Record<"email" | "password", string[]>>({
         email: [],
@@ -40,6 +40,13 @@ export function SignInForm() {
             const data = await AuthService.login(validPayload);
 
             setUser({
+                email: data?.userInfo.email ?? "",
+                name: data?.userInfo.name ?? "",
+                isLogged: true,
+                token: data?.token ?? "",
+            });
+
+            storeAuthCredentialsSession({
                 email: data?.userInfo.email ?? "",
                 name: data?.userInfo.name ?? "",
                 isLogged: true,

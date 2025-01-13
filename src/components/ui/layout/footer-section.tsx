@@ -6,7 +6,7 @@ import qrDownload from "@/assets/images/qr-download-app-mobile.png";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import { AmazonLogo } from "./amazon-logo";
+import { AmazonLogo } from "@/components/ui/amazon-logo";
 
 const links: Array<{ label: string; href: string; typeLink: "internal" | "external"; smallImage: string | null }> = [
     {
